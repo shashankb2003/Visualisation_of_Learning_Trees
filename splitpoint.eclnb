@@ -1,0 +1,56 @@
+{
+    "id": "7f814350-bf8a-403e-aba9-35bc676e3f77",
+    "files": [],
+    "nodes": [
+        {
+            "id": "12001ddf-d4f4-45ce-8050-8ce7376235f5",
+            "name": "",
+            "value": "Import Python3 as PYTHON;\r\nlayout:=RECORD\r\n   STRING feature;\r\n   REAL val;\r\nEND;\r\n\r\nSTREAMED DATASET(layout) Image():=EMBED(PYTHON:activity)\r\n\r\n\r\n        from sklearn.datasets import load_iris\r\n        from sklearn.tree import DecisionTreeClassifier\r\n        from sklearn.model_selection import train_test_split\r\n        import pandas as pd\r\n        import numpy as np\r\n        data = load_iris()\r\n        df = pd.DataFrame(data.data, columns=data.feature_names)\r\n        df['target'] = data.target\r\n        X_train, X_test, Y_train, Y_test = train_test_split(df[data.feature_names], df['target'], random_state=0)\r\n        clf = DecisionTreeClassifier(max_depth=5, random_state=0)\r\n        clf.fit(X_train, Y_train)\r\n        feat=clf.tree_.feature\r\n        thresh=clf.tree_.threshold\r\n        for i in range(len(feat)):\r\n            for j in range(len(feat)-i-1):\r\n                if(feat[j]>feat[j+1]):\r\n                    feat[j],feat[j+1]=feat[j+1],feat[j]\r\n                    thresh[j],thresh[j+1]=thresh[j+1],thresh[j]\r\n        feat=[x for x in feat if x!=-2]\r\n        thresh=[x for x in thresh if x!=-2] \r\n        li=[(feat[i],thresh[i]) for i in range(len(feat))]\r\n        li1=[]\r\n        for i in range(len(li)):\r\n            li1.append(())\r\n            li1[i]+=(data.feature_names[(int(li[i][0]))],)\r\n            li1[i]+=((float(li[i][1])),)\r\n        \r\n        return tuple(li1)\r\nENDEMBED;\r\nOUTPUT(Image(),NAMED('pls'));\r\n",
+            "mode": "ecl",
+            "outputs": []
+        },
+        {
+            "id": "454d29f5-505a-4e7f-a001-327a0bf34b68",
+            "name": "",
+            "value": "DATASET(layout) MAXMIN():=EMBED(PYTHON)\r\n    from sklearn.datasets import load_iris\r\n    import pandas as pd\r\n    data = load_iris()\r\n    df = pd.DataFrame(data.data, columns=data.feature_names)\r\n    res=[]\r\n    for i in range(4):\r\n        res.append((data.feature_names[i],max(df[data.feature_names[i]])))\r\n    return tuple(res)\r\nENDEMBED;\r\nOUTPUT(MAXMIN(),NAMED('pls1'));",
+            "mode": "ecl",
+            "outputs": [
+                "cGxzMSA9IFt7ImZlYXR1cmUiOiJzZXBhbCBsZW5ndGggKGNtKSIsInZhbCI6Ny45fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjo0LjR9LHsiZmVhdHVyZSI6InBldGFsIGxlbmd0aCAoY20pIiwidmFsIjo2Ljl9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjIuNX1dO3BscyA9IFt7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fSx7ImZlYXR1cmUiOiJzZXBhbCB3aWR0aCAoY20pIiwidmFsIjozLjEwMDAwMDAyMzg0MTg1OH0seyJmZWF0dXJlIjoicGV0YWwgbGVuZ3RoIChjbSkiLCJ2YWwiOjQuOTUwMDAwMDQ3NjgzNzE2fSx7ImZlYXR1cmUiOiJwZXRhbCB3aWR0aCAoY20pIiwidmFsIjowLjgwMDAwMDAxMTkyMDkyOX0seyJmZWF0dXJlIjoicGV0YWwgd2lkdGggKGNtKSIsInZhbCI6MS42NTAwMDAwMzU3NjI3ODd9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNzV9LHsiZmVhdHVyZSI6InBldGFsIHdpZHRoIChjbSkiLCJ2YWwiOjEuNjUwMDAwMDM1NzYyNzg3fV07"
+            ]
+        },
+        {
+            "id": "eed47a3c-72fa-424f-a226-13eda2933e7f",
+            "name": "",
+            "value": "features=[];\r\nvalues=[];\r\n{\r\nfor (let i = 0; i < pls1.length; i++) {\r\n        features.push(pls1[i].feature);\r\n        values.push(pls1[i].val);\r\n}\r\n}\r\n",
+            "mode": "js",
+            "outputs": [
+                "ZmVhdHVyZXM9W107DQp2YWx1ZXM9W107DQp7DQpmb3IgKGxldCBpID0gMDsgaSA8IHBsczEubGVuZ3RoOyBpKyspIHsNCiAgICAgICAgZmVhdHVyZXMucHVzaChwbHMxW2ldLmZlYXR1cmUpOw0KICAgICAgICB2YWx1ZXMucHVzaChwbHMxW2ldLnZhbCk7DQp9DQp9DQo="
+            ]
+        },
+        {
+            "id": "776c7f0e-4bc6-4d68-96be-9f03f84442a6",
+            "name": "",
+            "value": "\r\nsplit=[];\r\n{\r\n    for (let i = 0; i < pls.length; i++) {\r\n        split.push({x:pls[i].feature,y:pls[i].val});\r\n    }\r\n}",
+            "mode": "js",
+            "outputs": [
+                "DQpzcGxpdD1bXTsNCnsNCiAgICBmb3IgKGxldCBpID0gMDsgaSA8IHBscy5sZW5ndGg7IGkrKykgew0KICAgICAgICBzcGxpdC5wdXNoKHt4OnBsc1tpXS5mZWF0dXJlLHk6cGxzW2ldLnZhbH0pOw0KICAgIH0NCn0="
+            ]
+        },
+        {
+            "id": "a59cd91b-3426-4c6f-99eb-6e13fa92e94d",
+            "name": "",
+            "value": "Chart = require('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js')\r\nchar = {\r\n  const container = html`<canvas id=\"myChart\" width=\"50\" height=\"50\"></canvas>`;\r\n  const myChart = new Chart(container, {\r\n      type: 'bar',\r\n      data: {\r\n          labels: features,\r\n          datasets: [{\r\n              data: values,\r\n              backgroundColor: 'rgba(255, 99, 132, 0.2)',\r\n              borderColor: 'rgba(255, 99, 132, 1)',\r\n              borderWidth: 1\r\n          },\r\n          {\r\n                label:'Points',\r\n                backgroundColor:'rgba(255, 255,255, 0.2)',\r\n                showLine:false,\r\n                data:split,\r\n                type: \"line\"\r\n            }]\r\n      },\r\n      \r\n  });\r\n  \r\n  yield container;\r\n}",
+            "mode": "js",
+            "outputs": [
+                "Q2hhcnQgPSByZXF1aXJlKCdodHRwczovL2NkbmpzLmNsb3VkZmxhcmUuY29tL2FqYXgvbGlicy9DaGFydC5qcy8yLjkuMy9DaGFydC5idW5kbGUubWluLmpzJykNCmNoYXIgPSB7DQogIGNvbnN0IGNvbnRhaW5lciA9IGh0bWxgPGNhbnZhcyBpZD0ibXlDaGFydCIgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIj48L2NhbnZhcz5gOw0KICBjb25zdCBteUNoYXJ0ID0gbmV3IENoYXJ0KGNvbnRhaW5lciwgew0KICAgICAgdHlwZTogJ2JhcicsDQogICAgICBkYXRhOiB7DQogICAgICAgICAgbGFiZWxzOiBmZWF0dXJlcywNCiAgICAgICAgICBkYXRhc2V0czogW3sNCiAgICAgICAgICAgICAgZGF0YTogdmFsdWVzLA0KICAgICAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6ICdyZ2JhKDI1NSwgOTksIDEzMiwgMC4yKScsDQogICAgICAgICAgICAgIGJvcmRlckNvbG9yOiAncmdiYSgyNTUsIDk5LCAxMzIsIDEpJywNCiAgICAgICAgICAgICAgYm9yZGVyV2lkdGg6IDENCiAgICAgICAgICB9LA0KICAgICAgICAgIHsNCiAgICAgICAgICAgICAgICBsYWJlbDonUG9pbnRzJywNCiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6J3JnYmEoMjU1LCAyNTUsMjU1LCAwLjIpJywNCiAgICAgICAgICAgICAgICBzaG93TGluZTpmYWxzZSwNCiAgICAgICAgICAgICAgICBkYXRhOnNwbGl0LA0KICAgICAgICAgICAgICAgIHR5cGU6ICJsaW5lIg0KICAgICAgICAgICAgfV0NCiAgICAgIH0sDQogICAgICANCiAgfSk7DQogIA0KICB5aWVsZCBjb250YWluZXI7DQp9"
+            ]
+        },
+        {
+            "id": "6fdf1b50-00df-4a56-aac3-83498cf4a143",
+            "name": "",
+            "value": "",
+            "mode": "js",
+            "outputs": []
+        }
+    ]
+}
