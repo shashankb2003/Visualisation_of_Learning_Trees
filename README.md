@@ -4,7 +4,7 @@ This repository provides modules to make a visualization based on your Decision 
 
 **Methodology:**
 The record sets are passed into the python library calls through the EMBED function.  
-pandas, numpy and Scikit-learn librariesare used to construct Decision Trees models.  
+The pandas, numpy and Scikit-learn libraries are used to construct Decision Trees models.  
 Relevant information is extracted from the model and sent back to ECL.  
 Visualiser in ECL is used to visualise the information for quicker and better understanding.  
 
