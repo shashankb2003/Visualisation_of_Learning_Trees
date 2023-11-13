@@ -10,14 +10,14 @@ Visualiser in ECL is used to visualise the information for quicker and better un
 
 
 
-This repository contains 3 files
-1.feature_imp.ecl- Visualises the feature importance of each independent feature in the form of a bar graph
+This repository contains 3 files  
+1. feature_imp.ecl- Visualises the feature importance of each independent feature in the form of a bar graph
 
-2.mutualinfo.ecl- Visualises the mutual information between each independent and the dependent feature in the form of a bar graph
+2. mutualinfo.ecl- Visualises the mutual information between each independent and the dependent feature in the form of a bar graph
 
-3.splitpoint.eclnb- Visualises the split points of each independent feature as points on a bar graph showcasing each feature's min-max values.
+3. splitpoint.eclnb- Visualises the split points of each independent feature as points on a bar graph showcasing each feature's min-max values.
 
-**Results:**\n
+**Results:**  
 Note that all models are trained on the IRIS dataset.
 
 1. feature_imp.ecl
