@@ -1,12 +1,12 @@
 # Visualisation_of_Learning_Trees
-**Objectives**
+**Objectives:**
 This repository provides modules to make a visualization based on your Decision Tree model for better understanding of the working of the models
 
-**Methodology**
-The record sets are passed into the python library calls through the EMBED function.
-pandas, numpy and Scikit-learn librariesare used to construct Decision Trees models.
-Relevant information is extracted from the model and sent back to ECL.
-Visualiser in ECL is used to visualise the information for quicker and better understanding.
+**Methodology:**
+The record sets are passed into the python library calls through the EMBED function.  
+pandas, numpy and Scikit-learn librariesare used to construct Decision Trees models.  
+Relevant information is extracted from the model and sent back to ECL.  
+Visualiser in ECL is used to visualise the information for quicker and better understanding.  
 
 
 
@@ -17,7 +17,7 @@ This repository contains 3 files
 
 3.splitpoint.eclnb- Visualises the split points of each independent feature as points on a bar graph showcasing each feature's min-max values.
 
-**Results**
+**Results:**\n
 Note that all models are trained on the IRIS dataset.
 
 1. feature_imp.ecl
