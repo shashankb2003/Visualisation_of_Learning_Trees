@@ -1,5 +1,5 @@
 # Visualisation_of_Learning_Trees
-**Introduction :** This repository provides modules to visualize the various features of the Decision Tree Learning methods such as feature importance,split points and mutual information.Through visualization of these features users will be able to understand the in depth working of the Decision Tree modules in a comprehensive manner.Visualization of decision tree features can be done using various tools and libraries in Python by embedding it in the ECL code.One of the most commonly used libraries for visualizing decision trees is numpy along with the scikit-learn library.
+**Introduction :** This repository provides modules to visualize the various features of the Decision Tree Learning methods such as feature importance,split points and mutual information.Through visualization of these features users will be able to understand the in depth working of the Decision Tree modules in a comprehensive manner.Visualization of decision tree features can be done using various tools and libraries in Python by embedding it in the ECL code.One of the most commonly used libraries for visualizing decision trees is numpy along with the scikit-learn library.  
 **Objectives : **    
 *Provide a clear visual representation of the decision tree structure in ECL.  
 *Highlight the importance of different features in making decisions.  
@@ -7,7 +7,7 @@
 *Provide an interactive visualization tool that allows users to explore different parts of the decision tree.  
 *Serve as an educational tool for users unfamiliar with the specifics of decision trees in ECL.  
 *Provide insights into the inner workings of the model for training and knowledge transfer.  
-*Optimize the visualization for performance to handle larger datasets and trees efficiently.  
+*Optimize the visualization for performance to handle larger datasets and trees efficiently.    
 **Methodology:** This repository contains 3 files  
 1. feature_imp.ecl- Feature importance in decision trees refers to the quantification of the contribution of each feature to the model's predictive performance. It helps to identify which features have a more significant impact on the decision-making process of the tree.The module visualizes the feature importance of each independent feature in the form of a bar graph with the specified names for the features and depicts the relative importance of each feature on a scale of 1.00.  
 2. mutualinfo.ecl- Mutual information is a measure of the amount of information that knowing the value of one variable (feature) provides about another variable (target class). In the context of decision trees, mutual information is commonly used as a criterion to determine the best feature to split on at each node. It helps quantify the reduction in uncertainty about the target variable that is achieved by considering a particular feature for the split.This module visualizes the mutual information between each independent and the dependent feature in the form of a bar graph showing the relative information gain on a scale of 1.00  
@@ -18,15 +18,15 @@ The input dataset records are loaded into ECL and Python along with necessary li
 **Results:**  
 Note that all models are trained on the IRIS dataset.
 
-1. feature_imp.ecl
-<img width="949" alt="feature_imp" src="https://github.com/shashankb2003/Visualisation_of_Learning_Trees/assets/115179646/9b8a0b72-ec19-4568-9852-a9b69b9614a3">  
-Graph showcasing the feature importance of the independent features of the IRIS dataset.  
-2. mutualinfo.ecl
-<img width="950" alt="mutual_info" src="https://github.com/shashankb2003/Visualisation_of_Learning_Trees/assets/115179646/f7014b31-c44d-44f4-96a6-839d9ae68966">  
-Graph showcasing the mutual importance of each independent feature with the dependent.  
-3. splitpoint.eclnb
-<img width="629" alt="split_points" src="https://github.com/shashankb2003/Visualisation_of_Learning_Trees/assets/115179646/975eb3fb-453f-4261-b1b6-a81cfed09b52">
-Graph showcasing the max-min values of each independent feature and the different splits points of each feature.  
+1. feature_imp.ecl  
+<img width="949" alt="feature_imp" src="https://github.com/shashankb2003/Visualisation_of_Learning_Trees/assets/115179646/9b8a0b72-ec19-4568-9852-a9b69b9614a3">    
+Graph showcasing the feature importance of the independent features of the IRIS dataset.    
+2. mutualinfo.ecl  
+<img width="950" alt="mutual_info" src="https://github.com/shashankb2003/Visualisation_of_Learning_Trees/assets/115179646/f7014b31-c44d-44f4-96a6-839d9ae68966">    
+Graph showcasing the mutual importance of each independent feature with the dependent.    
+3. splitpoint.eclnb  
+<img width="629" alt="split_points" src="https://github.com/shashankb2003/Visualisation_of_Learning_Trees/assets/115179646/975eb3fb-453f-4261-b1b6-a81cfed09b52">    
+Graph showcasing the max-min values of each independent feature and the different splits points of each feature.    
 
 
 
