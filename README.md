@@ -23,6 +23,10 @@ The input dataset records are loaded into ECL and Python along with necessary li
 - scikit-learn
 - pandas
 - numpy
+
+## **Workflow**
+The input dataset records are loaded into ECL and Python along with necessary libraries such as pandas, numpy and Scikit-learn libraries that are used to construct Decision Trees models are embedded into ECL code using the EMBED function.The required feature from the decision tree is extracted using the dedicated library function and the results are sent to ECL in the form of a one dimensional list.The visualizer in ECL is used to visualize the information for quicker and better understanding of the Decision tree working.
+
 ## **Results:**  
 Note that all models are trained on the IRIS dataset.
 
